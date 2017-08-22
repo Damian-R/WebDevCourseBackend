@@ -1,22 +1,35 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+var express     = require("express"),
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose"),
+    app     = express();
+    
+mongoose.connect("mongodb://localhost/yelp_camp", {useMongoClient: true});
+
+// SCHEMA SETUP
+var campSchema = mongoose.Schema({
+     name: String,
+     image: String,
+     desc: String
+});
+
+var Campground = mongoose.model("Campground", campSchema);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-var campgrounds = [
-        {name: "Salmon Creek", image: "https://farm2.staticflickr.com/1424/1430198323_c26451b047.jpg"},
-        {name: "Granite Hill", image: "https://farm2.staticflickr.com/1281/4684194306_18ebcdb01c.jpg"},
-        {name: "Pig Mountain", image: "https://farm8.staticflickr.com/7252/7626464792_3e68c2a6a5.jpg"}
-    ];
 
 app.get("/", function(req, res){
     res.render("landing");
 });
 
 app.get("/campgrounds", function(req, res){
-    res.render("campgrounds", {campgrounds: campgrounds}); 
+    Campground.find({}, function(err, allCampgrounds){
+        if(!err){
+            res.render("index", {campgrounds: allCampgrounds});
+        } else {
+            console.log("ERROR");
+            console.log(err);
+        }
+    }); 
 });
 
 app.get("/campgrounds/new", function(req, res){
@@ -26,9 +39,29 @@ app.get("/campgrounds/new", function(req, res){
 app.post("/campgrounds", function(req, res){
     var name = req.body.name;
     var imageURL = req.body.imageURL;
-    var newCampground = {name: name, image: imageURL};
-    campgrounds.push(newCampground);
-    res.redirect("/campgrounds");
+    var desc = req.body.desc;
+    var newCampground = {name: name, image: imageURL, desc: desc};
+    Campground.create(newCampground, function(err, campground){
+        if(!err){
+            res.redirect("/campgrounds");
+        } else {
+            console.log("ERROR: " + err);
+        }
+    })
+});
+
+// SHOW - shows more info about one campground
+app.get("/campgrounds/:id", function(req, res){
+    console.log(req.params.id);
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(!err){
+            res.render("show", {campground: foundCampground});
+        } else {
+            console.log("ERROR: " + err);
+        }
+    });
+    //find campground with provided id
+    //render show template with that campground
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
