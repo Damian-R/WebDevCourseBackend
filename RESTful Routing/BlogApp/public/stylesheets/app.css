@@ -5,3 +5,15 @@ i.icon {
 body {
     margin-top: 7.0em;
 }
+
+#delete {
+    display: inline;
+}
+
+i.icon.chevron.circle.right:before {
+    vertical-align: middle;
+}
+
+.ui.button:not(.icon)>.right.icon:not(.button):not(.dropdown) {
+    vertical-align: baseline;
+}
