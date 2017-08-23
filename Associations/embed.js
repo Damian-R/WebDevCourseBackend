@@ -1,12 +1,58 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/blog_demo");
+mongoose.connect("mongodb://localhost/blog_demo_2", {useMongoClient: true});
+
+//POST
+var postSchema = new mongoose.Schema({
+    title: String,
+    content: String
+});
+
+var Post = mongoose.model("Post", postSchema);
 
 //USER
-var userSchema = mongoose.Schema({
+var userSchema = new mongoose.Schema({
     email: String,
-    name: String
+    name: String,
+    posts: [postSchema]
 });
 
 var User = mongoose.model("User", userSchema);
 
-//POST
+// var newUser = new User({
+//     email: "hermione@hogwarts.edu",
+//     name: "Hermione Granger"
+// });
+
+// newUser.posts.push({
+//     title: "How to brew",
+//     content: "Step 1: ..."
+// });
+
+// newUser.save(function(err, user){
+//     if(!err){
+//         console.log(user);
+//     } else {
+//         console.log(err);
+//     }
+// })
+
+// var newPost = new Post({
+//     title: "Post Title",
+//     content: "Post Content"
+// });
+
+// newPost.save(function(err, post){
+//     if(!err){
+//         console.log(post);
+//     } else {
+//         console.log(err);
+//     }
+// })
+
+// User.findOne({name: "Hermione Granger"}, function(err, user){
+//     if(!err){
+//         console.log(user);
+//     } else {
+//         console.log(err);
+//     }
+// });
