@@ -18,6 +18,7 @@
                     <h4 class="pull-right"><strong>$9.00/night</strong></h4>
                     <h4><a><strong><%= campground.name %></strong></a></h4>
                     <p><%= campground.desc %></p>
+                    <p><em>Submitted by: <%= campground.author.username %></em></p>
                 </div>
             </div>
             <div class="well">
@@ -28,7 +29,7 @@
                 <% campground.comments.forEach(function(comment){ %>
                     <div class="row">
                         <div class="col-md-12">
-                            <strong><%= comment.author %></strong>
+                            <strong>By <%= comment.author.username %></strong>
                             <span class="pull-right">10 days ago</span>
                             <p><%= comment.text %></p>
                         </div>
