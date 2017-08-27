@@ -27,7 +27,11 @@
             </div>
             <div class="well">
                 <div class="text-right">
+                    <% if(currentUser) {%>
                     <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add a new comment</a>
+                    <% } else { %>
+                    <button id="modal-trigger" class="btn btn-success">Add a new comment</button>
+                    <% } %>
                     <hr>
                 </div>
                 <% campground.comments.forEach(function(comment){ %>

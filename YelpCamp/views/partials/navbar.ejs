@@ -17,7 +17,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if(!currentUser){ %>
-          <li><a type="button" href="#" data-toggle="modal" data-target=".bs-example-modal-sm">Log In</a></li>
+          <li><a type="button" href="#" data-toggle="modal" data-target=".loginmodal">Log In</a></li>
           <li><a href="/register">Sign Up</a></li>
           <% } else { %>
           <li><a href="#">Currently logged in as <%= currentUser.username %></a></li>
@@ -37,7 +37,7 @@
   <% } %>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade loginmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <h4 class="text-center">Log In</h4>

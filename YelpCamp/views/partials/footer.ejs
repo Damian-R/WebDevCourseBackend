@@ -1,8 +1,17 @@
     <p>YelpCamp 2017</p>
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <% if(!currentUser) { %>
+        <script>
+        console.log("no user");
+            $("#new-campground").attr("data-target", ".loginmodal");
+            $("#new-campground").attr("data-toggle", "modal");
+            $("#new-campground").attr("href", "");
+        </script>
+    <% } else { %>
+        <script>
+            $("#new-campground").attr("href", "/campgrounds/new");
+        </script>
+    <% } %>
     </body>
 </html>
