@@ -2,6 +2,7 @@ var bodyParser  = require("body-parser"),
     passport    = require("passport"),
     LocalStrategy = require("passport-local"),
     express     = require("express"),
+    flash       = require("connect-flash"),
     mongoose    = require("mongoose"),
     seedDB      = require("./seeds"),
     User        = require("./models/user"),
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
+app.use(flash());
 
 // seed database
 // seedDB();
@@ -37,6 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
