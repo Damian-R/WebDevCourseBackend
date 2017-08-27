@@ -1,7 +1,10 @@
 var express = require("express"),
     router  = express.Router(),
+    flash   = require("connect-flash"),
     passport = require("passport"),
     User    = require("../models/user");
+
+router.use(flash());
 
 router.get("/", function(req, res){
     res.render("landing");
@@ -34,8 +37,9 @@ router.get("/login", function(req, res){
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/campgrounds",
-    failureRedirect: "/login"
+    successRedirect: "back",
+    failureRedirect: "/campgrounds",
+    failureFlash: "Invalid username or password"
 }), function(req, res){
 });
 
