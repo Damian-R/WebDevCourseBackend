@@ -17,8 +17,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if(!currentUser){ %>
-          <li><a type="button" href="#" data-toggle="modal" data-target=".loginmodal">Log In</a></li>
-          <li><a href="/register">Sign Up</a></li>
+          <li><a id="login-nav" class="auth-req" type="button" href="#" data-toggle="modal" data-target=".loginmodal">Log In</a></li>
+          <li><a id="register-nav" type="button" href="#" data-toggle="modal" data-target=".loginmodal">Sign Up</a></li>
           <% } else { %>
           <li><a href="#">Currently logged in as <%= currentUser.username %></a></li>
           <li><a href="/logout">Log Out</a></li>
@@ -40,20 +40,45 @@
 <div class="modal fade loginmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-      <h4 class="text-center">Log In</h4>
-      <hr>
-      <form action="/login" method="POST">
-        <div class="form-group">
-          <label for="username">username</label>
-          <input id="username" type="text" name="username" placeholder="username" class="form-control">
+      <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" id="login-pill"><a href="#mlogin" aria-controls="mlogin" role="tab" data-toggle="tab">Log In</a></li>
+        <li role="presentation" id="register-pill"><a href="#mregister" aria-controls="mregister" role="tab" data-toggle="tab">Register</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div class="tab-pane fade in" id="mlogin" role="tabpanel">
+          <h4 class="text-center">Log In</h4>
+          <hr>
+          <form action="/login" method="POST">
+            <div class="form-group">
+              <label for="username">username</label>
+              <input id="username" type="text" name="username" placeholder="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password">password</label>
+              <input id="password" type="password" name="password" placeholder="password" class="form-control">
+            </div>
+            
+            <button class="btn btn-primary btn-large btn-block">Submit</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="password">password</label>
-          <input id="password" type="password" name="password" placeholder="password" class="form-control">
+        <div class="tab-pane fade" id="mregister" role="tabpanel">
+          <h4 class="text-center">Register</h4>
+          <hr>
+          <form action="/register" method="POST">
+            <div class="form-group">
+              <label for="username">username</label>
+              <input id="username" type="text" name="username" placeholder="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="password">password</label>
+              <input id="password" type="password" name="password" placeholder="password" class="form-control">
+            </div>
+            
+            <button class="btn btn-primary btn-large btn-block">Submit</button>
+          </form>
         </div>
-        
-        <button class="btn btn-primary btn-large btn-block">Submit</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>
