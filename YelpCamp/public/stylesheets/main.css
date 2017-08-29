@@ -3,6 +3,10 @@
     resize: none;
 }
 
+.log-btn {
+    cursor: pointer;
+}
+
 .thumbnail img {
     width: 100%;
 }

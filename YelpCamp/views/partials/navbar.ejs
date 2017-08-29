@@ -17,7 +17,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if(!currentUser){ %>
-          <li><a id="login-nav" class="auth-req" type="button" href="#" data-toggle="modal" data-target=".loginmodal">Log In</a></li>
+          <li><a id="login-nav" class="auth-req log-btn" type="button" href="#" data-toggle="modal" data-target=".loginmodal">Log In</a></li>
           <li><a id="register-nav" type="button" href="#" data-toggle="modal" data-target=".loginmodal">Sign Up</a></li>
           <% } else { %>
           <li><a href="#">Currently logged in as <%= currentUser.username %></a></li>
